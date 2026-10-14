@@ -1,0 +1,236 @@
+body 
+{ 
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    background: #f4f4f4;
+    color: #222; 
+}
+header 
+{ 
+    background: #1a1a2e; 
+    padding: 15px 30px; 
+}
+header nav a 
+{ 
+    color: #fff; 
+    text-decoration: none; 
+    margin-right: 20px; 
+    font-weight: bold; 
+}
+
+main 
+{ 
+    max-width: 800px; 
+    margin: 30px auto; 
+    background: #fff; 
+    padding: 25px; 
+    border-radius: 8px; 
+}
+footer 
+{ 
+    text-align: center; 
+    padding: 15px; 
+    color: #666; 
+    font-size: 14px; 
+}
+main ul {
+    list-style: none;
+    padding: 0;
+}
+.articles-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.articles-table th,
+.articles-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+.preview-image {
+    width: 120px;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+}
+.full-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+.article-date {
+    color: #666;
+    font-size: 14px;
+}
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+.auth-form label {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+.auth-form input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+}
+.auth-form button {
+    margin-top: 20px;
+    padding: 10px;
+    background: #1a1a2e;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.auth-form button:hover {
+    background: #2e2e4f;
+}
+main .form-errors {
+    background: #fde8e8;
+    color: #b42318;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+.auth-form textarea {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+}
+.article-form {
+    max-width: 100%;
+}
+.message {
+    background: #e7f6ec;
+    color: #1e6b3a;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #1a1a2e;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.btn:hover {
+    background: #2e2e4f;
+}
+.btn-danger {
+    background: #c0392b;
+}
+.btn-danger:hover {
+    background: #a93226;
+}
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 15px;
+}
+.articles-table .actions {
+    margin-top: 0;
+}
+.actions form {
+    margin: 0;
+}
+.link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #c0392b;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+main ul.pagination {
+    display: flex;
+    gap: 5px;
+    margin-top: 20px;
+}
+.pagination li a,
+.pagination li span {
+    display: block;
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #1a1a2e;
+}
+.pagination li.active span {
+    background: #1a1a2e;
+    color: #fff;
+    border-color: #1a1a2e;
+}
+.pagination li.disabled span {
+    color: #aaa;
+}
+header nav {
+    display: flex;
+    align-items: center;
+}
+.nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.nav-user {
+    color: #bbb;
+    margin-right: 15px;
+}
+.logout-form {
+    margin: 0;
+}
+.logout-form button {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.logout-form button:hover {
+    background: #fff;
+    color: #1a1a2e;
+}
+.auth-form .checkbox {
+    font-weight: normal;
+    margin-top: 12px;
+}
+.comments-title {
+    margin-top: 35px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+.comment {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+.comment p {
+    margin: 6px 0;
+}
+.comment-head {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+.comment-head .article-date {
+    margin: 0;
+}
