@@ -51,9 +51,22 @@ class AuthServiceProvider extends ServiceProvider
             return Response::deny('Модерировать комментарии может только модератор.');
         });
 
-        /* Удалять комментарии может только модератор (он проходит через before). */
+        /* Редактировать комментарий может его автор (модератор проходит через before). */
+        Gate::define('comment-update', function (User $user, Comment $comment) {
+            if ($user->id === $comment->user_id) {
+                return Response::allow();
+            }
+
+            return Response::deny('Редактировать комментарий может только его автор или модератор.');
+        });
+
+        /* Удалять комментарий может его автор (модератор проходит через before). */
         Gate::define('comment-delete', function (User $user, Comment $comment) {
-            return Response::deny('Удалять комментарии может только модератор.');
+            if ($user->id === $comment->user_id) {
+                return Response::allow();
+            }
+
+            return Response::deny('Удалять комментарий может только его автор или модератор.');
         });
     }
 }

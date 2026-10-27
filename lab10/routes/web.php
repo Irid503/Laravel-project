@@ -44,6 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/comments/{comment}/reject', [CommentController::class, 'reject'])->name('comments.reject');
 
     Route::post('/articles/{article}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

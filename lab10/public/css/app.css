@@ -234,3 +234,7 @@ header nav {
 .comment-head .article-date {
     margin: 0;
 }
+
+.comment-actions {
+    margin-top: 0;
+}

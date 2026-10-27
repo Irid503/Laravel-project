@@ -56,13 +56,21 @@
 
             <p>{{ $comment->text }}</p>
 
-            @can('comment-delete', $comment)
-                <form action="{{ route('comments.destroy', $comment) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="link-button">Удалить</button>
-                </form>
-            @endcan
+            {{-- кнопки видны только автору комментария и модератору --}}
+            <div class="actions comment-actions">
+                @can('comment-update', $comment)
+                    <a href="{{ route('comments.edit', $comment) }}">Изменить</a>
+                @endcan
+
+                @can('comment-delete', $comment)
+                    <form action="{{ route('comments.destroy', $comment) }}" method="POST"
+                          onsubmit="return confirm('Удалить комментарий?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="link-button">Удалить</button>
+                    </form>
+                @endcan
+            </div>
         </div>
     @empty
         <p>Комментариев пока нет.</p>

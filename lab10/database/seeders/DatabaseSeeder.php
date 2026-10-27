@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,13 +25,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         /* Обычный читатель для проверки: reader@mail.ru / password */
-        User::factory()->create([
+        $reader = User::factory()->create([
             'name' => 'Читатель',
             'email' => 'reader@mail.ru',
             'role_id' => Role::where('name', 'reader')->value('id'),
         ]);
 
-        /* Заполняем таблицу статей фейковыми данными через фабрику. */
-        Article::factory(15)->create();
+        /* Заполняем таблицу статей фейковыми данными через фабрику
+           и к каждой статье добавляем по 2 одобренных комментария от читателя. */
+        Article::factory(15)->create()->each(function (Article $article) use ($reader) {
+            Comment::factory(2)->for($article)->for($reader)->create();
+        });
     }
 }

@@ -9,18 +9,24 @@ use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
-    /* Добавляет комментарий к статье. Комментарий модератора сразу одобрен, остальные ждут проверки. */
-    public function store(Request $request, Article $article)
+    /* Валидация одна и для добавления, и для редактирования комментария. */
+    private function validateComment(Request $request): array
     {
-        Gate::authorize('comment-create');
-
-        $data = $request->validate([
+        return $request->validate([
             'text' => 'required|string|min:2|max:1000',
         ], [
             'text.required' => 'Комментарий не может быть пустым.',
             'text.min' => 'Комментарий должен быть не короче :min символов.',
             'text.max' => 'Комментарий должен быть не длиннее :max символов.',
         ]);
+    }
+
+    /* Добавляет комментарий к статье. Комментарий модератора сразу одобрен, остальные ждут проверки. */
+    public function store(Request $request, Article $article)
+    {
+        Gate::authorize('comment-create');
+
+        $data = $this->validateComment($request);
 
         $isApproved = $request->user()->isModerator();
 
@@ -35,7 +41,34 @@ class CommentController extends Controller
         return redirect()->route('articles.show', $article)->with('message', $message);
     }
 
-    /* Удаляет комментарий (только модератор). */
+    /* Форма редактирования комментария (автор или модератор). */
+    public function edit(Comment $comment)
+    {
+        Gate::authorize('comment-update', $comment);
+
+        return view('comments.edit', ['comment' => $comment]);
+    }
+
+    /* Сохраняет изменения. Если правил не модератор, комментарий снова уходит на модерацию. */
+    public function update(Request $request, Comment $comment)
+    {
+        Gate::authorize('comment-update', $comment);
+
+        $data = $this->validateComment($request);
+
+        $isApproved = $request->user()->isModerator() ? $comment->is_approved : false;
+
+        $comment->update([
+            'text' => $data['text'],
+            'is_approved' => $isApproved,
+        ]);
+
+        $message = $isApproved ? 'Комментарий обновлён' : 'Комментарий обновлён и снова ожидает модерации';
+
+        return redirect()->route('articles.show', $comment->article)->with('message', $message);
+    }
+
+    /* Удаляет комментарий (автор или модератор). */
     public function destroy(Comment $comment)
     {
         Gate::authorize('comment-delete', $comment);
